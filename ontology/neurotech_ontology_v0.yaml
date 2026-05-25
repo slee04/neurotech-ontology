@@ -1,0 +1,407 @@
+meta:
+  name: "NeuroCET - TIPSS Ontology v0"
+  purpose: "Lightweight concept scaffold to support scoping, coding, and database tagging"
+  provenance:
+    - "Project remit: neurotech, TIPSS, convergence, mitigation"
+    - "Early project notes and brainstorming discussions"
+    - "Gap analysis from smart city keyword lists"
+  scope:
+    in_scope:
+      - "Neurotechnology and application context"
+      - "TIPSS risks and mitigations"
+      - "Convergence"
+      - "Stakeholders"
+      - "Documents / evidence"
+    out_of_scope:
+      - "Deep biomedical mechanism ontologies"
+      - "Full legal ontologies"
+  roadmap:
+    semantics:
+      - "Add definitions, interpretations, and examples for each facet/value"
+      - "Specify relationships between facets where relevant"
+      - "Specify rules and constraints"
+    vocabulary:
+      - "Expand and validate controlled vocabularies / taxonomies for key concepts"
+      - "Create tagging guidelines for consistent application"
+    implementation:
+      - "Implement in database and tagging tools"
+      - "Iterate based on literature review and expert input"
+  regenerated_from: "neurotech_ontology_v0.xlsx (OneDrive, 2026-02-25)"
+
+facets:
+
+  scope:
+    description: "Inclusion/exclusion for the project"
+    values:
+      - scope.in
+      - scope.borderline
+      - scope.out
+    notes: "Borderline captures contested cases (e.g. hearing aids, drugs, peripheral biosignals)"
+
+  neurotech:
+    description: "Types of neurotechnology relevant to the project"
+    dimensions:
+
+      neuro_claim:
+        description: "Is this neurotech?"
+        values:
+          - neuro.claim.direct
+          - neuro.claim.proxy_inference # captures contested/edge cases
+          - neuro.claim.none
+        notes: "Claim to being called a neurotech. Proxy/inference captures cases where there is debate about whether the technology qualifies."
+
+      interface_target:
+        values:
+          - neuro.target.brain
+          - neuro.target.peripheral_nervous_system
+          - neuro.target.neural_proxy
+        notes: "Neural proxy includes signals tightly correlated with neural activity (e.g. eye-tracking, facial EMG)"
+
+      interaction_mode:
+        values:
+          - neuro.interaction.sensing
+          - neuro.interaction.stimulation
+          - neuro.interaction.bidirectional_closed_loop
+          - neuro.interaction.hybrid_other
+
+      mechanism:
+        values:
+          - neuro.mechanism.electrical
+          - neuro.mechanism.optical
+          - neuro.mechanism.magnetic
+          - neuro.mechanism.acoustic
+          - neuro.mechanism.chemical
+          - neuro.mechanism.other
+        notes: "Multiple selections allowed"
+
+      invasiveness:
+        values:
+          - neuro.invasiveness.noninvasive
+          - neuro.invasiveness.minimally_invasive
+          - neuro.invasiveness.invasive
+        notes: "Based on degree of physical intrusion into the body"
+
+      maturity:
+        description: "Development/deployment stage of the technology"
+        values:
+          - neuro.maturity.experimental
+          - neuro.maturity.clinical_trial
+          - neuro.maturity.approved_limited
+          - neuro.maturity.approved_broad
+          - neuro.maturity.consumer
+        notes: "Multiple values possible (e.g., approved clinically + consumer versions exist)"
+
+  context:
+    description: "Where/why is it used"
+    dimensions:
+
+      setting:
+        values:
+          - context.setting.medical
+          - context.setting.research
+          - context.setting.education
+          - context.setting.workplace
+          - context.setting.military
+          - context.setting.public_safety
+          - context.setting.consumer
+          - context.setting.other
+
+      purpose:
+        description: "Primary intended purpose as stated"
+        values:
+          - context.purpose.therapeutic
+          - context.purpose.diagnostic_assessment
+          - context.purpose.enhancement
+          - context.purpose.research
+          - context.purpose.entertainment
+          - context.purpose.training_wellbeing
+          - context.purpose.safety_performance
+
+      operator:
+        description: "Who controls/operates the neurotech?"
+        values:
+          - context.operator.self
+          - context.operator.caregiver
+          - context.operator.clinician
+          - context.operator.researcher
+          - context.operator.educator
+          - context.operator.employer
+          - context.operator.public_authority
+          - context.operator.service_provider
+          - context.operator.vendor_platform
+          - context.operator.other
+          - context.operator.mixed
+
+      subject:
+        description: "Who is being measured / modulated?"
+        values:
+          - context.subject.self
+          - context.subject.patient
+          - context.subject.research_participant
+          - context.subject.student
+          - context.subject.employee
+          - context.subject.soldier
+          - context.subject.citizen
+          - context.subject.consumer
+          - context.subject.other
+
+  convergence:
+    description: "Technologies combined with neurotech"
+    dimensions:
+
+      tech:
+        description: "Other technology modalities combined with neurotech"
+        values:
+          - conv.tech.ai_ml
+          - conv.tech.cloud_platforms
+          - conv.tech.xr_vr_ar_mr
+          - conv.tech.biosensing_wearables
+          - conv.tech.iot_smart_env
+          - conv.tech.robotics_prosthetics
+          - conv.tech.digital_twins
+          - conv.tech.multimodal # neurotech × neurotech convergence (e.g. imaging + stimulation)
+          - conv.tech.other
+
+      type:
+        description: "Type of convergence"
+        values:
+          - conv.type.parallel # co-present but loosely coupled
+          - conv.type.integrated # data/output flow between systems
+          - conv.type.embedded_fused # single system
+          - conv.type.unknown
+
+      rationale:
+        description: "Desired effect of convergence on neurotech"
+        values:
+          - conv.rationale.quality_improvement # accuracy, reliability, usability
+          - conv.rationale.new_capability # actuation, immersive interaction, closed-loop
+          - conv.rationale.deployment # automation, scaling, accessibility
+
+  tipss_plus:
+    description: "TIPSS+ domains — core TIPSS mandate (tipss.*) plus broader ethical values (values.*)"
+    values:
+      - tipss.trust
+      - tipss.identity
+      - tipss.privacy
+      - tipss.safety
+      - tipss.security
+      - values.autonomy
+      - values.fairness
+      - values.rights
+      - values.ethics
+    descriptions:
+      tipss.trust: "Trust"
+      tipss.identity: "Identity"
+      tipss.privacy: "Privacy"
+      tipss.safety: "Safety - physical and psychological"
+      tipss.security: "Security"
+      values.autonomy: "Autonomy / agency"
+      values.fairness: "Fairness / justice"
+      values.rights: "Rights (cross-cutting)"
+      values.ethics: "Ethics (cross-cutting)"
+    what_good_looks_like:
+      tipss.trust: "Warranted confidence that the system and its operators behave as claimed and can be appropriately relied upon."
+      tipss.identity: "Respectful and appropriate handling of identity and personhood in relation to neurotechnology, including identity-linked processes and impacts."
+      tipss.privacy: "Protection of persons' information including neural data and meaningful control over collection, processing, inference, and sharing."
+      tipss.safety: "Protection from physical, psychological, and functional harm and adverse outcomes arising from neurotechnology across contexts of use."
+      tipss.security: "Protection against malicious compromise and unacceptable loss of confidentiality, integrity, or availability in neurotechnology systems and pipelines."
+      values.autonomy: "People retain meaningful self-determination and control over neurotechnology use and its effects, free from undue manipulation or coercion."
+      values.fairness: "Benefits, burdens, and errors are not distributed unjustly; systems and governance avoid discrimination and support equitable outcomes."
+      values.rights: "Neurotechnology is developed and used in ways that respect and protect relevant human/legal rights across contexts."
+      values.ethics: "Ethical principles and legitimacy considerations are explicitly addressed in development, governance, and use."
+    term_families:
+      tipss.trust: "assurance; acceptance; acceptability; confidence; reliability; trustworthiness; legitimacy; credibility"
+      tipss.identity: "authenticity; identity; neuroidentity; personhood; selfhood"
+      tipss.privacy: "confidentiality; anonymity; pseudonymity; mental privacy"
+      tipss.safety: "harm prevention"
+      tipss.security: "cybersecurity; confidentiality; integrity; availability; resilience"
+      values.autonomy: "autonomy; agency; self-determination; control"
+      values.fairness: "fairness; equity; justice; bias; discrimination; inclusion"
+      values.rights: "rights; human rights; civil liberties; fundamental rights"
+      values.ethics: "ethics; ethical; bioethics; neuroethics; responsible innovation"
+    notes: "Two-tier prefix: tipss.* = core SPRITE mandate; values.* = broader ethical values that don't fit squarely into TIPSS. Cross-cutting (rights, ethics) = conceptual note that they tend to appear alongside other domains; all 9 are independently taggable."
+
+  risk:
+    description: "Potential risks associated with the neurotech"
+    dimensions:
+
+      type:
+        description: "Which TIPSS+ domain the risk affects"
+        values:
+          - risk.type.trust
+          - risk.type.identity
+          - risk.type.privacy
+          - risk.type.safety
+          - risk.type.security
+          - risk.type.autonomy
+          - risk.type.fairness
+        what_bad_looks_like:
+          risk.type.trust: "Erosion of warranted confidence"
+          risk.type.identity: "Harms affecting identity/personhood, including misattribution, stigmatization, or unwanted identity impacts."
+          risk.type.privacy: "Loss of privacy/confidentiality or loss of meaningful control over personal/neural information."
+          risk.type.safety: "Physical, psychological, or functional harms and adverse effects affecting individuals or groups."
+          risk.type.security: "Harms arising from loss of system integrity, confidentiality, or availability (regardless of how caused)."
+          risk.type.autonomy: "Loss of agency or meaningful choice in relation to neurotechnology use and effects."
+          risk.type.fairness: "Unjust or unequal impacts across people/groups, including exclusion and inequitable access or outcomes."
+        term_families:
+          risk.type.trust: "distrust; mistrust; threat; fear; worry; anxiety"
+          risk.type.identity: "misattribution; misrepresentation; stigma; dehumanization"
+          risk.type.privacy: "privacy violation; privacy breach; intrusion; exposure of sensitive data"
+          risk.type.safety: "harm; injury; adverse outcome; unsafe; distress; impairment; side effects; vulnerability"
+          risk.type.security: "security incident; security breach; compromised integrity; compromised availability; compromised confidentiality"
+          risk.type.autonomy: "loss of agency; loss of autonomy; lack of choice; inability to refuse; inability to withdraw; compelled; undue influence"
+          risk.type.fairness: "inequity; unfair; unequal impact; unequal access; exclusion; marginalization; disparate impact; digital divide; discrimination; bias"
+
+      mechanism:
+        description: "Mechanism of risk"
+        values:
+          - risk.mechanism.deception_misrepresentation
+          - risk.mechanism.function_creep
+          - risk.mechanism.inference
+          - risk.mechanism.surveillance_monitoring
+          - risk.mechanism.profiling
+          - risk.mechanism.failure_malfunction
+          - risk.mechanism.data_sharing_exposure
+          - risk.mechanism.security_compromise
+          - risk.mechanism.misuse
+          - risk.mechanism.automated_decision
+          - risk.mechanism.manipulation
+          - risk.mechanism.coercion
+          - risk.mechanism.exploitation
+          - risk.mechanism.bias_unfair_decision
+          - risk.mechanism.other
+        descriptions:
+          risk.mechanism.deception_misrepresentation: "Misleading claims, omission of limitations, manipulative framing, or misrepresentation of system capabilities/risks that distort understanding or consent."
+          risk.mechanism.function_creep: "Expansion of use beyond original purpose, scope, or consent, including repurposing data, devices, or capabilities."
+          risk.mechanism.inference: "Deriving sensitive information from neurodata or related signals beyond what was explicitly collected/expected (e.g., mental states, traits, identity attributes)."
+          risk.mechanism.surveillance_monitoring: "Continuous or systematic observation, tracking, or monitoring of individuals/groups using neurotechnology/neurodata in ways that undermine privacy, autonomy, or social trust."
+          risk.mechanism.profiling: "Profiling"
+          risk.mechanism.failure_malfunction: "Unintentional technical failure, malfunction, error, or degraded performance leading to harmful outcomes."
+          risk.mechanism.data_sharing_exposure: "Legal but problematic sharing or exposure of neurodata."
+          risk.mechanism.security_compromise: "Malicious compromise of devices, software, models, data pipelines, or communications (e.g., tampering, unauthorized access, disruption, hacking, adversarial attack)."
+          risk.mechanism.misuse: "Intentional use of neurotechnology or neurodata in ways that are inappropriate, prohibited, or outside intended/authorized use."
+          risk.mechanism.automated_decision: "Automated decision making using neurodata."
+          risk.mechanism.manipulation: "Influencing thoughts, emotions, or behavior through neurotechnology or neurodata-enabled feedback/targeting in ways that bypass or distort reflective choice."
+          risk.mechanism.coercion: "Use of pressure, constraint, conditionality, or force to require participation, data provision, device use, or compliance (including inability to refuse/withdraw)."
+          risk.mechanism.exploitation: "Taking unfair advantage of individuals/groups (e.g., vulnerable populations, asymmetries of power/information) for benefit, often without fair compensation or protection."
+          risk.mechanism.bias_unfair_decision: "Systematic error or biased processes in measurement, modelling, interpretation, or decision workflows that produce unfair treatment or unequal outcomes."
+          risk.mechanism.other: "Mechanism not captured by the above categories; specify in notes."
+
+      scope:
+        description: "Scope of risk impact"
+        values:
+          - risk.scope.individual
+          - risk.scope.group
+          - risk.scope.societal
+
+      evidence:
+        description: "Level of evidence for the risk"
+        values:
+          - risk.evidence.speculative
+          - risk.evidence.empirical_limited
+          - risk.evidence.empirical_strong
+          - risk.evidence.documented
+
+  mitigation:
+    description: "Potential mitigations for risks"
+    dimensions:
+
+      type:
+        description: "Type of mitigation"
+        values:
+          - mitig.type.technical
+          - mitig.type.sociotechnical
+          - mitig.type.policy_governance
+          - mitig.type.legal
+          - mitig.type.other
+
+      mechanism:
+        description: "Mechanism of mitigation"
+        values:
+          - mitig.mechanism.design_safety # safety by design, trust by design
+          - mitig.mechanism.data_protection_privacy # privacy by design
+          - mitig.mechanism.security_engineering # encryption, secure architecture
+          - mitig.mechanism.data_governance_stewardship # provenance, sharing controls
+          - mitig.mechanism.access_control_authentication # credentials, authorisation
+          - mitig.mechanism.informed_consent # consent processes
+          - mitig.mechanism.transparency_explainability
+          - mitig.mechanism.awareness_training_education
+          - mitig.mechanism.assurance_audit_evaluation
+          - mitig.mechanism.risk_assessment_impact_assessment
+          - mitig.mechanism.oversight_governance_accountability # including liability
+          - mitig.mechanism.participation_engagement # co-development, co-design, co-production
+          - mitig.mechanism.standards_guidelines
+          - mitig.mechanism.regulation_compliance # certification, enforcement
+          - mitig.mechanism.other
+
+      provenance:
+        description: "Source of mitigation"
+        values:
+          - mitig.prov.manufacturer
+          - mitig.prov.user
+          - mitig.prov.organisation_institution
+          - mitig.prov.policy_regulator
+          - mitig.prov.community_society
+
+      level:
+        description: "Where mitigation operates"
+        values:
+          - mitig.level.individual # user practices, personal controls
+          - mitig.level.organisation # institutional policies, workplace standards
+          - mitig.level.sector # industry regulations, professional guidelines
+          - mitig.level.national # government laws, national frameworks
+          - mitig.level.international # global standards, treaties, recommendations
+
+      evidence_maturity:
+        description: "Level of evidence/maturity for the mitigation"
+        values:
+          - mitig.evidence.conceptual # proposed
+          - mitig.evidence.experimental # piloted
+          - mitig.evidence.deployed
+          - mitig.evidence.adopted
+
+  stakeholders:
+    description: "Stakeholders involved with neurotech"
+    values:
+      - stake.patients
+      - stake.healthcare_providers
+      - stake.researchers
+      - stake.developers_vendors
+      - stake.users_operators
+      - stake.users_subjects
+      - stake.policy_regulators
+      - stake.ngos_advocacy
+      - stake.community_society
+      - stake.other
+
+  document:
+    description: "Provenance and type of document"
+    dimensions:
+
+      type:
+        description: "Type of document"
+        values:
+          - doc.type.academic_paper
+          - doc.type.report
+          - doc.type.guidance_toolkit
+          - doc.type.industry_whitepaper
+          - doc.type.standard
+          - doc.type.consultation
+          - doc.type.policy_strategy
+          - doc.type.news_media
+          - doc.type.other
+
+      source_org:
+        description: "Source of document"
+        values:
+          - doc.source.academic
+          - doc.source.professional_society
+          - doc.source.regulator
+          - doc.source.standards_body
+          - doc.source.igo # intergovernmental organization
+          - doc.source.government
+          - doc.source.funding_agency
+          - doc.source.company
+          - doc.source.ngo
+          - doc.source.media_outlet
+          - doc.source.other
